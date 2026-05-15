@@ -9,6 +9,8 @@ import java.sql.Statement;
 
 public class Database {
 
+  public String[] columns = {"No", "商品コード", "品名", "数量"};
+
   private String databaseUrl = "jdbc:sqlite:data/database.db";
   private Connection con = null;
   private Statement cursor = null;
