@@ -3,9 +3,11 @@ package com.gyomu.system;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Database {
 
@@ -13,60 +15,83 @@ public class Database {
 
   private String databaseUrl = "jdbc:sqlite:data/database.db";
   private Connection con = null;
-  private Statement cursor = null;
-  private String create_sql = "DROP TABLE \"商品\";\r\n" + //
-        "CREATE TABLE \"商品\" (\r\n" + //
-        "\t\"No\"\tINTEGER NOT NULL UNIQUE,\r\n" + //
-        "\t\"商品コード\"\tTEXT NOT NULL UNIQUE,\r\n" + //
-        "\t\"品名\"\tTEXT NOT NULL,\r\n" + //
-        "\t\"数量\"\tINTEGER NOT NULL\r\n" + //
-        ");";
+  // private Statement cursor = null;
+  private PreparedStatement query = null;
+  private String query_sql = "SELECT * FROM \"商品\"";
+  // private String query_sql = "SELECT * FROM \"商品\" WHERE \"品名\" LIKE \"%?%\" LIMIT ?;";
+  private String[] create_sql = {
+    "DROP TABLE IF EXISTS \"商品\";",
+    "CREATE TABLE \"商品\" (" + //
+      "\"No\"\tINTEGER NOT NULL UNIQUE," + //
+      "\"商品コード\"\tTEXT NOT NULL UNIQUE," + //
+      "\"品名\"\tTEXT NOT NULL," + //
+      "\"数量\"\tINTEGER NOT NULL" + //
+      ");",
+      "INSERT INTO \"商品\" VALUES (1,'A100','テスト商品',30);",
+      "INSERT INTO \"商品\" VALUES (2,'B12','テスト',20);",
+  };
 
   public Database () {
     File data = new File("data");
     if (!data.exists())
       data.mkdirs();
     try {
-      this.con = DriverManager.getConnection(this.databaseUrl);
-      this.con.close();
+      con = DriverManager.getConnection(this.databaseUrl);
+      if (con != null)
+        this.create_table(con);
+        this.create_cursor(con);
     } catch (SQLException e) { e.printStackTrace(); }
   }
 
-  void create_cursor () {
-    if (this.cursor == null) {
+  private void create_cursor (Connection con) {
+    if (this.query == null) {
       try {
-        this.cursor = this.con.createStatement();
-        this.cursor.setQueryTimeout(30);
+        this.query = con.prepareStatement(query_sql);
+        this.query.setQueryTimeout(30);
       } catch (SQLException e) { e.printStackTrace(); }
     }
   }
 
-  void create_table (Statement cursor) {
+  private void create_table (Connection con) {
     try {
-      cursor.executeUpdate(create_sql);
+      Statement stmt = con.createStatement();
+      for (String sql : create_sql)
+        stmt.execute(sql);
+      stmt.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
-  ResultSet query (String sql) {
+  private ResultSet equery (PreparedStatement stmt, String[] params) {
     try {
-      return this.cursor.executeQuery(sql);
+      System.err.println(stmt);
+      for (int i = 0; i < params.length; i++)
+        stmt.setString(i+1, params[0]);
+      return stmt.executeQuery();
     } catch (SQLException e) { e.printStackTrace(); }
     return null;
   }
 
-  
-  void update (String sql) {
+  public ArrayList<String[]> searchName (String name, int limit) {
+    String[] params = {};
+    // String[] params = {name, Integer.toString(limit)};
+    ResultSet rs = this.equery(this.query, params);
+    ArrayList<String[]> ret = new ArrayList<String[]>();
     try {
-      this.cursor.executeUpdate(sql);
-    } catch (SQLException e) { e.printStackTrace(); }
+      do {
+        String[] p = new String[columns.length];
+        for (int i = 0; i < p.length; i++)
+          p[i] = rs.getString(i+1);
+        ret.add(p);
+      } while (rs.next());
+    } catch (SQLException e) {};
+    return ret;
   }
   
-  void exec (String sql) {
+  public void close () {
     try {
-      this.cursor.execute(sql);
-    } catch (SQLException e) { e.printStackTrace(); }
+      this.con.close();
+    } catch (SQLException e) {}
   }
-  
 }
