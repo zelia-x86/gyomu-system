@@ -65,7 +65,6 @@ public class Database {
 
   private ResultSet equery (PreparedStatement stmt, String[] params) {
     try {
-      System.err.println(stmt);
       for (int i = 0; i < params.length; i++)
         stmt.setString(i+1, params[0]);
       return stmt.executeQuery();

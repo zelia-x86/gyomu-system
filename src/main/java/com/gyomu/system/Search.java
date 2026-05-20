@@ -9,9 +9,10 @@ public class Search extends JPanel {
     private JTextField searchField;
     private JButton searchButton;
 
-    public Search() {
+    public Search(Table table, Database db) {
         searchField = new JTextField(20);
         searchButton = new JButton("検索");
+        searchButton.addActionListener(new Listener(searchButton, searchField, db, table));
 
         add(searchField);
         add(searchButton);
@@ -30,6 +31,7 @@ public class Search extends JPanel {
         String searchText = searchField.getText();
         if (searchText != null && !searchText.isEmpty()) {
             if (targetText.contains(searchText)) {
+                System.out.println(searchText);
                 return searchText;
             }
         }

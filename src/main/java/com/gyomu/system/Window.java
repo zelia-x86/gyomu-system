@@ -10,8 +10,8 @@ public class Window extends JFrame {
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); 
-        Search Search = new Search();
         Table table = new Table(db);
+        Search Search = new Search(table, db);
         add(Search, BorderLayout.NORTH);
         add(new JScrollPane(new JTable(table)));
     }
