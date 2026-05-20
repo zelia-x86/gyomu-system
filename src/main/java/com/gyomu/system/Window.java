@@ -11,7 +11,12 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); 
         Table table = new Table(db);
-        Search Search = new Search(table, db);
+        Fields fields = new Fields();
+
+        // buttons
+        Search Search = new Search(fields, table, db);
+
+
         add(Search, BorderLayout.NORTH);
         add(new JScrollPane(new JTable(table)));
     }

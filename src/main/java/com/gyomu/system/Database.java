@@ -17,8 +17,8 @@ public class Database {
   private Connection con = null;
   // private Statement cursor = null;
   private PreparedStatement query = null;
-  private String query_sql = "SELECT * FROM \"商品\"";
-  // private String query_sql = "SELECT * FROM \"商品\" WHERE \"品名\" LIKE \"%?%\" LIMIT ?;";
+  // private String query_sql = "SELECT * FROM \"商品\"";
+  private String query_sql = "SELECT * FROM \"商品\" WHERE \"品名\" LIKE ? LIMIT ?;";
   private String[] create_sql = {
     "DROP TABLE IF EXISTS \"商品\";",
     "CREATE TABLE \"商品\" (" + //
@@ -63,21 +63,12 @@ public class Database {
     }
   }
 
-  private ResultSet equery (PreparedStatement stmt, String[] params) {
-    try {
-      for (int i = 0; i < params.length; i++)
-        stmt.setString(i+1, params[0]);
-      return stmt.executeQuery();
-    } catch (SQLException e) { e.printStackTrace(); }
-    return null;
-  }
-
   public ArrayList<String[]> searchName (String name, int limit) {
-    String[] params = {};
-    // String[] params = {name, Integer.toString(limit)};
-    ResultSet rs = this.equery(this.query, params);
     ArrayList<String[]> ret = new ArrayList<String[]>();
     try {
+    this.query.setString(1, "%" + name + "%");
+    this.query.setInt(2, limit);
+    ResultSet rs = this.query.executeQuery();
       do {
         String[] p = new String[columns.length];
         for (int i = 0; i < p.length; i++)
