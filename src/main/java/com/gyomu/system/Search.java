@@ -1,18 +1,16 @@
 package com.gyomu.system;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class Search extends JPanel {
-    private JTextField searchField;
     private JButton searchButton;
 
-    public Search(Table table, Database db) {
-        searchField = new JTextField(20);
+    public Search(Fields fields, Table table, Database db) {
         searchButton = new JButton("検索");
-        searchButton.addActionListener(new Listener(searchButton, searchField, db, table));
+        searchButton.setActionCommand("search");
+        searchButton.addActionListener(new Listener(db, table, fields));
 
-        add(searchField);
+        add(fields.search);
         add(searchButton);
     }
 }
