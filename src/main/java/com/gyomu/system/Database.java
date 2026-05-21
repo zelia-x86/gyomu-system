@@ -38,8 +38,6 @@ public class Database {
 "INSERT INTO \"商品\" VALUES (8,'H700','スマートウォッチ 心拍数計測',28);",
 "INSERT INTO \"商品\" VALUES (9,'I800','ノイズキャンセリングヘッドホン',32);",
 "INSERT INTO \"商品\" VALUES (10,'J900','モバイルバッテリー 20000mAh',60);",
-
-
   };
 
   public Database() {
