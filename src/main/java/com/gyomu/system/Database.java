@@ -27,8 +27,17 @@ public class Database {
       "\"品名\"\tTEXT NOT NULL," + //
       "\"数量\"\tINTEGER NOT NULL" + //
       ");",
-      "INSERT INTO \"商品\" VALUES (1,'A100','テスト商品',30);",
-      "INSERT INTO \"商品\" VALUES (2,'B12','テスト',20);",
+
+      "INSERT INTO \"商品\" VALUES (1,'A100','高品質USB-Cケーブル 1m',30);",
+      "INSERT INTO \"商品\" VALUES (2,'B120','ワイヤレスマウス 静音タイプ',20);",
+      "INSERT INTO \"商品\" VALUES (3,'C200','Bluetoothスピーカー 防水仕様',25);",
+      "INSERT INTO \"商品\" VALUES (4,'D300','27インチ4Kモニター',35);",
+      "INSERT INTO \"商品\" VALUES (5,'E400','ノートパソコンスタンド アルミ製',40);",
+      "INSERT INTO \"商品\" VALUES (6,'F500','ゲーミングキーボード RGBライト',45);",
+      "INSERT INTO \"商品\" VALUES (7,'G600','500GB ポータブルSSD',50);",
+      "INSERT INTO \"商品\" VALUES (8,'H700','スマートウォッチ 心拍数計測',28);",
+      "INSERT INTO \"商品\" VALUES (9,'I800','ノイズキャンセリングヘッドホン',32);",
+      "INSERT INTO \"商品\" VALUES (10,'J900','モバイルバッテリー 20000mAh',60);",
   };
 
   public Database () {
