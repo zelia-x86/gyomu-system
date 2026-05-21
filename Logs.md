@@ -18,9 +18,10 @@
  - [x] SQL接続 [@zelia-x86]
  - [x] テーブル表示 [@zelia-x86], [@TY061026]
  - [x] SQLのデータを表示 [@zelia-x86]
- - [ ] テストデータ [@doanthuong68jp-del]
+ - [x] テストデータ [@doanthuong68jp-del]
  - [ ] デザイン設計（一部）[@1317-wq]
- - [ ] 商品検索 （進行中）[@zelia-x86] [@TY061026]
+ - [x] 商品検索 （進行中）[@zelia-x86] [@TY061026]
+ - [ ] データ入力
 
 
 [@zelia-x86]: https://github.com/zelia-x86
