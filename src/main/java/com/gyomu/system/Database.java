@@ -40,68 +40,6 @@ public class Database {
 "INSERT INTO \"商品\" VALUES (10,'J900','モバイルバッテリー 20000mAh',60);",
 
 
-      "CREATE TABLE \"倉庫\" (" +
-          "\"倉庫ID\"\tINTEGER NOT NULL UNIQUE," +
-          "\"倉庫名\"\tTEXT NOT NULL," +
-          "\"住所\"\tTEXT NOT NULL" +
-          ");",
-
-      "INSERT INTO \"倉庫\" VALUES (1,'東京メイン倉庫','東京都');",
-      "INSERT INTO \"倉庫\" VALUES (2,'大阪配送センター','大阪府');",
-      "INSERT INTO \"倉庫\" VALUES (3,'名古屋ストレージ','愛知県');",
-
-      "CREATE TABLE \"入庫\" (" +
-          "\"入庫ID\"\tINTEGER NOT NULL UNIQUE," +
-          "\"商品No\"\tINTEGER NOT NULL," +
-          "\"倉庫ID\"\tINTEGER NOT NULL," +
-          "\"数量\"\tINTEGER NOT NULL," +
-          "\"日付\"\tTEXT NOT NULL" +
-          ");",
-
-      "INSERT INTO \"入庫\" VALUES (1,1,1,100,'2024-01-10');",
-      "INSERT INTO \"入庫\" VALUES (2,2,1,150,'2024-01-12');",
-      "INSERT INTO \"入庫\" VALUES (3,3,2,200,'2024-01-15');",
-      "INSERT INTO \"入庫\" VALUES (4,4,3,120,'2024-01-20');",
-      "INSERT INTO \"入庫\" VALUES (5,5,2,180,'2024-01-25');",
-      "INSERT INTO \"入庫\" VALUES (6,6,1,160,'2024-01-28');",
-
-      "CREATE TABLE \"出庫\" (" +
-          "\"出庫ID\"\tINTEGER NOT NULL UNIQUE," +
-          "\"商品No\"\tINTEGER NOT NULL," +
-          "\"倉庫ID\"\tINTEGER NOT NULL," +
-          "\"数量\"\tINTEGER NOT NULL," +
-          "\"日付\"\tTEXT NOT NULL" +
-          ");",
-
-      "INSERT INTO \"出庫\" VALUES (1,1,1,20,'2024-02-01');",
-      "INSERT INTO \"出庫\" VALUES (2,2,1,30,'2024-02-03');",
-      "INSERT INTO \"出庫\" VALUES (3,3,2,50,'2024-02-05');",
-      "INSERT INTO \"出庫\" VALUES (4,4,3,40,'2024-02-07');",
-      "INSERT INTO \"出庫\" VALUES (5,5,2,60,'2024-02-10');",
-      "INSERT INTO \"出庫\" VALUES (6,6,1,25,'2024-02-12');",
-
-      "CREATE TABLE \"仕入先\" (" +
-          "\"仕入先ID\"\tINTEGER NOT NULL UNIQUE," +
-          "\"仕入先名\"\tTEXT NOT NULL," +
-          "\"住所\"\tTEXT NOT NULL" +
-          ");",
-
-      "INSERT INTO \"仕入先\" VALUES (1,'ABC商事','東京都');",
-      "INSERT INTO \"仕入先\" VALUES (2,'日本供給株式会社','大阪府');",
-      "INSERT INTO \"仕入先\" VALUES (3,'サプライヤー名古屋','愛知県');",
-
-      "CREATE TABLE \"発注\" (" +
-          "\"発注ID\"\tINTEGER NOT NULL UNIQUE," +
-          "\"商品No\"\tINTEGER NOT NULL," +
-          "\"仕入先ID\"\tINTEGER NOT NULL," +
-          "\"数量\"\tINTEGER NOT NULL," +
-          "\"日付\"\tTEXT NOT NULL" +
-          ");",
-
-      "INSERT INTO \"発注\" VALUES (1,1,1,50,'2024-01-05');",
-      "INSERT INTO \"発注\" VALUES (2,3,2,80,'2024-01-08');",
-      "INSERT INTO \"発注\" VALUES (3,5,3,100,'2024-01-12');",
-
   };
 
   public Database() {

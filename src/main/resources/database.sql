@@ -8,4 +8,8 @@ CREATE TABLE "商品" (
 );
 INSERT INTO "商品" VALUES (1,'A100','テスト商品',30);
 INSERT INTO "商品" VALUES (2,'B12','テスト',20);
+INSERT INTO "商品" VALUES (3,'C12','テスト',30);
+INSERT INTO "商品" VALUES (4,'D12','テスト',50);
+INSERT INTO "商品" VALUES (5,'E16','テスト',60);
+INSERT INTO "商品" VALUES (6,'F16','テスト',20);
 COMMIT;
