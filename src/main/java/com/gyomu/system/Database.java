@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Database {
 
-  public String[] columns = {"No", "商品コード", "品名", "数量"};
+  public String[] columns = { "No", "商品コード", "品名", "数量" };
 
   private String databaseUrl = "jdbc:sqlite:data/database.db";
   private Connection con = null;
@@ -20,18 +20,91 @@ public class Database {
   // private String query_sql = "SELECT * FROM \"商品\"";
   private String query_sql = "SELECT * FROM \"商品\" WHERE \"品名\" LIKE ? LIMIT ?;";
   private String[] create_sql = {
-    "DROP TABLE IF EXISTS \"商品\";",
-    "CREATE TABLE \"商品\" (" + //
-      "\"No\"\tINTEGER NOT NULL UNIQUE," + //
-      "\"商品コード\"\tTEXT NOT NULL UNIQUE," + //
-      "\"品名\"\tTEXT NOT NULL," + //
-      "\"数量\"\tINTEGER NOT NULL" + //
-      ");",
-      "INSERT INTO \"商品\" VALUES (1,'A100','テスト商品',30);",
-      "INSERT INTO \"商品\" VALUES (2,'B12','テスト',20);",
+      "DROP TABLE IF EXISTS \"商品\";",
+      "CREATE TABLE \"商品\" (" +
+"\"No\"\tINTEGER NOT NULL UNIQUE," +
+"\"商品コード\"\tTEXT NOT NULL UNIQUE," +
+"\"品名\"\tTEXT NOT NULL," +
+"\"数量\"\tINTEGER NOT NULL" +
+");",
+
+"INSERT INTO \"商品\" VALUES (1,'A100','高品質USB-Cケーブル 1m',30);",
+"INSERT INTO \"商品\" VALUES (2,'B120','ワイヤレスマウス 静音タイプ',20);",
+"INSERT INTO \"商品\" VALUES (3,'C200','Bluetoothスピーカー 防水仕様',25);",
+"INSERT INTO \"商品\" VALUES (4,'D300','27インチ4Kモニター',35);",
+"INSERT INTO \"商品\" VALUES (5,'E400','ノートパソコンスタンド アルミ製',40);",
+"INSERT INTO \"商品\" VALUES (6,'F500','ゲーミングキーボード RGBライト',45);",
+"INSERT INTO \"商品\" VALUES (7,'G600','500GB ポータブルSSD',50);",
+"INSERT INTO \"商品\" VALUES (8,'H700','スマートウォッチ 心拍数計測',28);",
+"INSERT INTO \"商品\" VALUES (9,'I800','ノイズキャンセリングヘッドホン',32);",
+"INSERT INTO \"商品\" VALUES (10,'J900','モバイルバッテリー 20000mAh',60);",
+
+
+      "CREATE TABLE \"倉庫\" (" +
+          "\"倉庫ID\"\tINTEGER NOT NULL UNIQUE," +
+          "\"倉庫名\"\tTEXT NOT NULL," +
+          "\"住所\"\tTEXT NOT NULL" +
+          ");",
+
+      "INSERT INTO \"倉庫\" VALUES (1,'東京メイン倉庫','東京都');",
+      "INSERT INTO \"倉庫\" VALUES (2,'大阪配送センター','大阪府');",
+      "INSERT INTO \"倉庫\" VALUES (3,'名古屋ストレージ','愛知県');",
+
+      "CREATE TABLE \"入庫\" (" +
+          "\"入庫ID\"\tINTEGER NOT NULL UNIQUE," +
+          "\"商品No\"\tINTEGER NOT NULL," +
+          "\"倉庫ID\"\tINTEGER NOT NULL," +
+          "\"数量\"\tINTEGER NOT NULL," +
+          "\"日付\"\tTEXT NOT NULL" +
+          ");",
+
+      "INSERT INTO \"入庫\" VALUES (1,1,1,100,'2024-01-10');",
+      "INSERT INTO \"入庫\" VALUES (2,2,1,150,'2024-01-12');",
+      "INSERT INTO \"入庫\" VALUES (3,3,2,200,'2024-01-15');",
+      "INSERT INTO \"入庫\" VALUES (4,4,3,120,'2024-01-20');",
+      "INSERT INTO \"入庫\" VALUES (5,5,2,180,'2024-01-25');",
+      "INSERT INTO \"入庫\" VALUES (6,6,1,160,'2024-01-28');",
+
+      "CREATE TABLE \"出庫\" (" +
+          "\"出庫ID\"\tINTEGER NOT NULL UNIQUE," +
+          "\"商品No\"\tINTEGER NOT NULL," +
+          "\"倉庫ID\"\tINTEGER NOT NULL," +
+          "\"数量\"\tINTEGER NOT NULL," +
+          "\"日付\"\tTEXT NOT NULL" +
+          ");",
+
+      "INSERT INTO \"出庫\" VALUES (1,1,1,20,'2024-02-01');",
+      "INSERT INTO \"出庫\" VALUES (2,2,1,30,'2024-02-03');",
+      "INSERT INTO \"出庫\" VALUES (3,3,2,50,'2024-02-05');",
+      "INSERT INTO \"出庫\" VALUES (4,4,3,40,'2024-02-07');",
+      "INSERT INTO \"出庫\" VALUES (5,5,2,60,'2024-02-10');",
+      "INSERT INTO \"出庫\" VALUES (6,6,1,25,'2024-02-12');",
+
+      "CREATE TABLE \"仕入先\" (" +
+          "\"仕入先ID\"\tINTEGER NOT NULL UNIQUE," +
+          "\"仕入先名\"\tTEXT NOT NULL," +
+          "\"住所\"\tTEXT NOT NULL" +
+          ");",
+
+      "INSERT INTO \"仕入先\" VALUES (1,'ABC商事','東京都');",
+      "INSERT INTO \"仕入先\" VALUES (2,'日本供給株式会社','大阪府');",
+      "INSERT INTO \"仕入先\" VALUES (3,'サプライヤー名古屋','愛知県');",
+
+      "CREATE TABLE \"発注\" (" +
+          "\"発注ID\"\tINTEGER NOT NULL UNIQUE," +
+          "\"商品No\"\tINTEGER NOT NULL," +
+          "\"仕入先ID\"\tINTEGER NOT NULL," +
+          "\"数量\"\tINTEGER NOT NULL," +
+          "\"日付\"\tTEXT NOT NULL" +
+          ");",
+
+      "INSERT INTO \"発注\" VALUES (1,1,1,50,'2024-01-05');",
+      "INSERT INTO \"発注\" VALUES (2,3,2,80,'2024-01-08');",
+      "INSERT INTO \"発注\" VALUES (3,5,3,100,'2024-01-12');",
+
   };
 
-  public Database () {
+  public Database() {
     File data = new File("data");
     if (!data.exists())
       data.mkdirs();
@@ -39,20 +112,24 @@ public class Database {
       con = DriverManager.getConnection(this.databaseUrl);
       if (con != null)
         this.create_table(con);
-        this.create_cursor(con);
-    } catch (SQLException e) { e.printStackTrace(); }
+      this.create_cursor(con);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
-  private void create_cursor (Connection con) {
+  private void create_cursor(Connection con) {
     if (this.query == null) {
       try {
         this.query = con.prepareStatement(query_sql);
         this.query.setQueryTimeout(30);
-      } catch (SQLException e) { e.printStackTrace(); }
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
     }
   }
 
-  private void create_table (Connection con) {
+  private void create_table(Connection con) {
     try {
       Statement stmt = con.createStatement();
       for (String sql : create_sql)
@@ -63,25 +140,28 @@ public class Database {
     }
   }
 
-  public ArrayList<String[]> searchName (String name, int limit) {
+  public ArrayList<String[]> searchName(String name, int limit) {
     ArrayList<String[]> ret = new ArrayList<String[]>();
     try {
-    this.query.setString(1, "%" + name + "%");
-    this.query.setInt(2, limit);
-    ResultSet rs = this.query.executeQuery();
+      this.query.setString(1, "%" + name + "%");
+      this.query.setInt(2, limit);
+      ResultSet rs = this.query.executeQuery();
       do {
         String[] p = new String[columns.length];
         for (int i = 0; i < p.length; i++)
-          p[i] = rs.getString(i+1);
+          p[i] = rs.getString(i + 1);
         ret.add(p);
       } while (rs.next());
-    } catch (SQLException e) {};
+    } catch (SQLException e) {
+    }
+    ;
     return ret;
   }
-  
-  public void close () {
+
+  public void close() {
     try {
       this.con.close();
-    } catch (SQLException e) {}
+    } catch (SQLException e) {
+    }
   }
 }
