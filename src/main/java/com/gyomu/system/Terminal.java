@@ -10,20 +10,21 @@ public class Terminal extends JPanel {
         searchButton.setActionCommand("search");
         searchButton.addActionListener(new Listener(db, table, fields));
 
-        JButton goodsCodeButton = new JButton("商品コード");
-        goodsCodeButton.setActionCommand("goodsCodeSearch");
-        goodsCodeButton.addActionListener(new Listener(db, table, fields));
+        JButton goodsgGroupButton = new JButton("製品グループ");
+        goodsgGroupButton.setActionCommand("goodsGroupSearch");
+        goodsgGroupButton.addActionListener(new Listener(db, table, fields));
 
-        JButton goodsNumberButton = new JButton("品番");
-        goodsNumberButton.setActionCommand("goodsNumberSearch");
-        goodsNumberButton.addActionListener(new Listener(db, table, fields));
+        JButton saveLocationButton = new JButton("保管場所");
+        saveLocationButton.setActionCommand("saveLocationSearch");
+        saveLocationButton.addActionListener(new Listener(db, table, fields));
 
-        JButton goodsNameButton = new JButton("品名");
-        goodsNameButton.setActionCommand("goodsNameSearch");
+        JButton customerButton = new JButton("得意先");
+        customerButton.setActionCommand("customerSearch");
+        customerButton.addActionListener(new Listener(db, table, fields));
 
-        JButton goodsQuantityButton = new JButton("数量");
-        goodsQuantityButton.setActionCommand("goodsQuantitySearch");
-        goodsQuantityButton.addActionListener(new Listener(db, table, fields));
+        JButton purchaseButton = new JButton("仕入");
+        purchaseButton.setActionCommand("purchaseSearch");
+        purchaseButton.addActionListener(new Listener(db, table, fields));
 
         JButton send = new JButton("送信");
         send.setActionCommand("send");
@@ -32,17 +33,17 @@ public class Terminal extends JPanel {
         add(fields.search);
         add(searchButton);
 
-        add(fields.goodsCodeField);
-        add(goodsCodeButton);
+        add(fields.goodsgGroupButton);
+        add(goodsgGroupButton);
 
-        add(fields.goodsNumberField);
-        add(goodsNumberButton);
+        add(fields.saveLocationButton);
+        add(saveLocationButton);
 
-        add(fields.goodsNameField);
-        add(goodsNameButton);
+        add(fields.customerButton);
+        add(customerButton);
 
-        add(fields.goodsQuantityField);
-        add(goodsQuantityButton);
+        add(fields.purchaseButton);
+        add(purchaseButton);
 
         add(fields.input);
         add(send);

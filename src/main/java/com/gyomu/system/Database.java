@@ -88,7 +88,7 @@ public class Database {
     return ret;
   }
   
-  public ArrayList<String[]> searchGoodsCode (String code, int limit) {
+  public ArrayList<String[]> goodsgGroupButton (String code, int limit) {
     ArrayList<String[]> ret = new ArrayList<String[]>();
     try {
     this.query.setString(1, code);
@@ -104,7 +104,7 @@ public class Database {
     return ret;
   }
 
-  public ArrayList<String[]> searchGoodsNumber (String number, int limit) {
+  public ArrayList<String[]> saveLocationButton (String number, int limit) {
     ArrayList<String[]> ret = new ArrayList<String[]>();
     try {
     this.query.setString(1, number);
@@ -120,7 +120,7 @@ public class Database {
     return ret;
   }
 
-  public ArrayList<String[]> searchGoodsName (String name, int limit) {
+  public ArrayList<String[]> customerButton (String name, int limit) {
     ArrayList<String[]> ret = new ArrayList<String[]>();
     try {
     this.query.setString(1, name);
@@ -136,7 +136,7 @@ public class Database {
     return ret;
   }
 
-  public ArrayList<String[]> searchGoodsQuantity (String quantity, int limit) {
+  public ArrayList<String[]> purchaseButton (String quantity, int limit) {
     ArrayList<String[]> ret = new ArrayList<String[]>();
     try {
     this.query.setString(1, quantity);

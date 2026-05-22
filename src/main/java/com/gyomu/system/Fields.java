@@ -11,9 +11,10 @@ public class Fields {
   // fields
   public JTextField search = new JTextField(20);
   public JTextField goodsCodeField = new JTextField(20);
-  public JTextField goodsNumberField = new JTextField(20);
-  public JTextField goodsNameField = new JTextField(20);
-  public JTextField goodsQuantityField = new JTextField(20);
+  public JTextField goodsgGroupButton = new JTextField(20);
+  public JTextField saveLocationButton = new JTextField(20);
+  public JTextField customerButton = new JTextField(20);
+  public JTextField purchaseButton = new JTextField(20);
   public JTextField input = new JTextField(20);
 
   public Fields() {
@@ -29,17 +30,17 @@ public class Fields {
 
         JPanel part2 = new JPanel(new GridLayout(2, 2, 5, 5));
         part2.add(new JLabel("品番"));
-        part2.add(goodsNumberField);
+        part2.add(goodsgGroupButton);
 
         part2.add(new JLabel("品名"));
-        part2.add(goodsNameField);
+        part2.add(saveLocationButton);
 
         JPanel part3 = new JPanel(new GridLayout(2, 2, 5, 5));
         part3.add(new JLabel("数量"));
-        part3.add(goodsQuantityField);
+        part3.add(customerButton);
 
         part3.add(new JLabel("入力"));
-        part3.add(input);
+        part3.add(purchaseButton);
 
         // Add  main panel
         mainPanel.add(part1);
