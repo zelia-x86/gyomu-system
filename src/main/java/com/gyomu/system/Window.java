@@ -1,4 +1,5 @@
 package com.gyomu.system;
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
@@ -10,7 +11,8 @@ public class Window extends JFrame {
         // setResizable(false);
         setLayout(new GridLayout(2, 0));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
+        setBackground(Color.PINK);
         Table table = new Table(db);
         Fields fields = new Fields();
 

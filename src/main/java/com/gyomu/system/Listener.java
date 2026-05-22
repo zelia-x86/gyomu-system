@@ -21,7 +21,13 @@ public class Listener implements ActionListener {
     switch (e.getActionCommand()) {
       case "search":
         this.table.clearRows();
-        for (String[] et : db.searchName(this.fields.search.getText(), 10))
+        for (String[] et : db.searchName(
+          fields.seihin.getText(),
+          fields.shouhin.getText(),
+          fields.shinamei.getText(),
+          fields.shinaban.getText(),
+          Integer.parseInt(fields.suuryo.getText())
+        ))
           this.table.insertRows(et);        
         break;
     

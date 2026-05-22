@@ -20,8 +20,9 @@
  - [x] SQLのデータを表示 [@zelia-x86]
  - [x] テストデータ [@doanthuong68jp-del]
  - [ ] デザイン設計（一部）[@1317-wq]
- - [x] 商品検索 （進行中）[@zelia-x86] [@TY061026]
+ - [x] 商品検索 [@zelia-x86] [@TY061026]
  - [ ] データ入力
+ - [ ] 色々なフィールドを追加
 
 
 [@zelia-x86]: https://github.com/zelia-x86
