@@ -88,6 +88,70 @@ public class Database {
     return ret;
   }
   
+  public ArrayList<String[]> searchGoodsCode (String code, int limit) {
+    ArrayList<String[]> ret = new ArrayList<String[]>();
+    try {
+    this.query.setString(1, code);
+    this.query.setInt(2, limit);
+    ResultSet rs = this.query.executeQuery();
+      do {
+        String[] p = new String[columns.length];
+        for (int i = 0; i < p.length; i++)
+          p[i] = rs.getString(i+1);
+        ret.add(p);
+      } while (rs.next());
+    } catch (SQLException e) {};
+    return ret;
+  }
+
+  public ArrayList<String[]> searchGoodsNumber (String number, int limit) {
+    ArrayList<String[]> ret = new ArrayList<String[]>();
+    try {
+    this.query.setString(1, number);
+    this.query.setInt(2, limit);
+    ResultSet rs = this.query.executeQuery();
+      do {
+        String[] p = new String[columns.length];
+        for (int i = 0; i < p.length; i++)
+          p[i] = rs.getString(i+1);
+        ret.add(p);
+      } while (rs.next());
+    } catch (SQLException e) {};
+    return ret;
+  }
+
+  public ArrayList<String[]> searchGoodsName (String name, int limit) {
+    ArrayList<String[]> ret = new ArrayList<String[]>();
+    try {
+    this.query.setString(1, name);
+    this.query.setInt(2, limit);
+    ResultSet rs = this.query.executeQuery();
+      do {
+        String[] p = new String[columns.length];
+        for (int i = 0; i < p.length; i++)
+          p[i] = rs.getString(i+1);
+        ret.add(p);
+      } while (rs.next());
+    } catch (SQLException e) {};
+    return ret;
+  }
+
+  public ArrayList<String[]> searchGoodsQuantity (String quantity, int limit) {
+    ArrayList<String[]> ret = new ArrayList<String[]>();
+    try {
+    this.query.setString(1, quantity);
+    this.query.setInt(2, limit);
+    ResultSet rs = this.query.executeQuery();
+      do {
+        String[] p = new String[columns.length];
+        for (int i = 0; i < p.length; i++)
+          p[i] = rs.getString(i+1);
+        ret.add(p);
+      } while (rs.next());
+    } catch (SQLException e) {};
+    return ret;
+  }
+
   public void close () {
     try {
       this.con.close();
