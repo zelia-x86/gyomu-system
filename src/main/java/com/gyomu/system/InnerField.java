@@ -1,15 +1,47 @@
 package com.gyomu.system;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 class InnerField extends JTextField {
   private JPanel parent;
+  private String defaultText;
+  private boolean blocked;
 
-  public InnerField () {
+  public InnerField (String defaultText) {
     this.parent = null;
+    this.defaultText = defaultText;
+    this.blocked = false;
+    setdefault();
+
+    addFocusListener(new FocusListener() {
+      @Override
+      public void focusGained(FocusEvent e) {
+        if (blocked) {
+          setText("");
+          setForeground(Color.BLACK);
+          blocked = false;
+        }
+      }
+
+      @Override
+      public void focusLost(FocusEvent e) {
+        setdefault();
+      }
+    });
+  }
+
+  private void setdefault () {
+    if (getText().isBlank() && !blocked) {
+      setForeground(Color.GRAY);
+      setText(defaultText);
+      blocked = true;
+    }
   }
 
   public void setParent (JPanel parent) {
