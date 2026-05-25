@@ -21,12 +21,18 @@ public class Listener implements ActionListener {
     switch (e.getActionCommand()) {
       case "search":
         this.table.clearRows();
+        int suuryo =  100;
+        try {
+          suuryo = Integer.parseInt(fields.suuryo.getText());
+        } catch (NumberFormatException ef) {
+          fields.suuryo.setText("" + suuryo);
+        }
         for (String[] et : db.searchName(
           fields.seihin.getText(),
           fields.shouhin.getText(),
           fields.shinamei.getText(),
           fields.shinaban.getText(),
-          Integer.parseInt(fields.suuryo.getText())
+          suuryo
         ))
           this.table.insertRows(et);        
         break;
