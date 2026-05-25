@@ -12,7 +12,7 @@ public class Terminal extends JPanel {
     private GridBagLayout layout;
     private GridBagConstraints gbc;
 
-    public Terminal(Fields fields, Table table, Database db) {
+    public Terminal(Fields fields, Table table, Database db, Listener listener) {
         layout = new GridBagLayout();
         gbc = new GridBagConstraints();
         setLayout(layout);
@@ -42,9 +42,9 @@ public class Terminal extends JPanel {
 
         // actions
         search.setActionCommand("search")   ;
-        search.addActionListener(new Listener(db, table, fields));
+        search.addActionListener(listener);
         send.setActionCommand("send");
-        send.addActionListener(new Listener(db, table, fields));
+        send.addActionListener(listener);
             
 
         // constraints.gridheight = 3;

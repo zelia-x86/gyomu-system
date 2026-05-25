@@ -13,11 +13,13 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setBackground(Color.PINK);
+
         Table table = new Table(db);
         Fields fields = new Fields();
+        Listener listener = new Listener(db, table, fields, this);
 
         // buttons
-        Terminal terminal = new Terminal(fields, table, db);
+        Terminal terminal = new Terminal(fields, table, db, listener);
         View view = new View(db, table);
 
 
