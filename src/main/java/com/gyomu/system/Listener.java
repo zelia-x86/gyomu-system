@@ -24,7 +24,7 @@ public class Listener implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     int suuryo =  0;
     try {
-      suuryo = Integer.parseInt(fields.suuryo.getText());
+      suuryo = Integer.parseInt(fields.suuryo.getText().strip());
     } catch (NumberFormatException ef) {}
 
     // button router
@@ -36,20 +36,20 @@ public class Listener implements ActionListener {
         }
         this.table.clearRows();
         for (String[] et : db.searchName(
-          fields.seihin.getText(),
-          fields.shouhin.getText(),
-          fields.shinamei.getText(),
-          fields.shinaban.getText(),
+          fields.seihin.getText().strip(),
+          fields.shouhin.getText().strip(),
+          fields.shinamei.getText().strip(),
+          fields.shinaban.getText().strip(),
           suuryo
         ))
           this.table.insertRows(et);        
         break;
       case "send":
         boolean ret = this.db.entry(
-          fields.seihin.getText(),
-          fields.shouhin.getText(),
-          fields.shinamei.getText(),
-          fields.shinaban.getText(),
+          fields.seihin.getText().strip(),
+          fields.shouhin.getText().strip(),
+          fields.shinamei.getText().strip(),
+          fields.shinaban.getText().strip(),
           suuryo
         );
         if (!ret) {
