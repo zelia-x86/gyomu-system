@@ -9,12 +9,12 @@ public class Listener implements ActionListener {
   private Table table;
   private Fields fields;
 
-  public Listener (Database db, Table table, Fields fields) {
+  public Listener(Database db, Table table, Fields fields) {
     this.fields = fields;
     this.db = db;
     this.table = table;
   }
- 
+
   @Override
   public void actionPerformed(ActionEvent e) {
     // button router
@@ -22,18 +22,24 @@ public class Listener implements ActionListener {
       case "search":
         this.table.clearRows();
         for (String[] et : db.searchName(
-          fields.seihin.getText(),
-          fields.shouhin.getText(),
-          fields.shinamei.getText(),
-          fields.shinaban.getText(),
-          Integer.parseInt(fields.suuryo.getText())
-        ))
-          this.table.insertRows(et);        
+            fields.seihin.getText(),
+            fields.shouhin.getText(),
+            fields.shinamei.getText(),
+            fields.shinaban.getText(),
+            Integer.parseInt(fields.suuryo.getText()))) {
+          this.table.insertRows(et);
+        }
+        for (String[] er : db.searchRight(
+            fields.seihingroup.getText(),
+            fields.houkanbasho.getText(),
+            fields.tokuisaki.getText(),
+            fields.shiiresaki.getText())) {
+          this.table.insertRows(er);
+        }
         break;
-    
       default:
         break;
-    }    
+    }
   }
-  
+
 }

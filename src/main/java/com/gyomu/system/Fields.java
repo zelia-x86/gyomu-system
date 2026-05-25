@@ -10,6 +10,12 @@ public class Fields {
   public JTextField shinaban = new JTextField();
   public JTextField suuryo = new JTextField();
 
+  //fields right align
+  public JTextField seihingroup = new JTextField();
+  public JTextField houkanbasho = new JTextField();
+  public JTextField tokuisaki = new JTextField();
+  public JTextField shiiresaki = new JTextField();
+
   // public Fields () {
   //   this.name.setMaximumSize(this.name.getPreferredSize());
   // }

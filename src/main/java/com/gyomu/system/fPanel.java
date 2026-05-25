@@ -23,7 +23,7 @@ public class fPanel extends JPanel {
     final JPanel rightPanel = new JPanel(new GridBagLayout());
 
     // leftPanel.setBackground(Color.PINK);
-    rightPanel.setBackground(Color.GRAY);
+   // rightPanel.setBackground(Color.GRAY);
 
     gbc.fill = GridBagConstraints.BOTH;
     gbc.weightx = 1;
@@ -54,7 +54,16 @@ public class fPanel extends JPanel {
     gbc.gridy = 4;
     leftPanel.add(inputPanel("数量（以下）", fields.suuryo), gbc);
 
-
+    // right panel
+    gbc.gridy = 0;  
+    rightPanel.add(inputPanel("製品グループ", fields.seihingroup), gbc);
+    gbc.gridy = 1;
+    rightPanel.add(inputPanel("保管場所", fields.houkanbasho), gbc);
+    gbc.gridy = 2;
+    rightPanel.add(inputPanel("得意先", fields.tokuisaki), gbc);
+    gbc.gridy = 3;
+    rightPanel.add(inputPanel("仕入先", fields.shiiresaki), gbc);
+    
 
 
     // setBackground(Color.RED);

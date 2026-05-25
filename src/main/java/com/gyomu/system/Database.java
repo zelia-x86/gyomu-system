@@ -98,6 +98,25 @@ public class Database {
     } catch (SQLException e) {};
     return ret;
   }
+
+  public ArrayList<String[]> searchRight (String seihingroup, String houkanbasho, String tokuisaki,String shiiresaki) {
+    ArrayList<String[]> ret = new ArrayList<String[]>();
+    try {
+      this.query.setString(1, "%" + seihingroup + "%");
+      this.query.setString(2, "%" + houkanbasho + "%"); 
+      this.query.setString(3, "%" + tokuisaki + "%");
+      this.query.setString(4, "%" + shiiresaki + "%");
+      this.query.setInt(5, 999);
+      ResultSet rs = this.query.executeQuery();
+      do {
+        String[] p = new String[columns.length];
+        for (int i = 0; i < p.length; i++)
+          p[i] = rs.getString(i+1);
+        ret.add(p);
+      } while (rs.next());
+    } catch (SQLException e) {};
+    return ret;
+  }
   
   public void close () {
     try {
