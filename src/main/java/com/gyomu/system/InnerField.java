@@ -49,6 +49,14 @@ class InnerField extends JTextField {
   }
 
   @Override
+  public String getText() {
+    String ret = super.getText();
+    if (ret.equals(this.defaultText))
+      ret = "";
+    return ret;
+  }
+
+  @Override
   public Dimension getPreferredSize() {
     Dimension dim = super.getPreferredSize();
     if (this.parent != null)
