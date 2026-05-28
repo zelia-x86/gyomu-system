@@ -6,14 +6,18 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class fPanel extends JPanel {
 
   private Color border = new Color(74, 181, 223);
 
-  public fPanel (Fields fields) {
+  public fPanel(Fields fields) {
     setLayout(new GridBagLayout());
     final GridBagConstraints gbc = new GridBagConstraints();
 
@@ -28,13 +32,12 @@ public class fPanel extends JPanel {
     gbc.weighty = 1;
     gbc.gridx = 0;
     gbc.gridy = 0;
-    gbc.insets = new Insets(5,5,5,5);
+    gbc.insets = new Insets(5, 5, 5, 5);
 
     add(leftPanel, gbc);
 
     gbc.gridx = 1;
-    add (rightPanel, gbc);
-
+    add(rightPanel, gbc);
 
     // left panel
     gbc.weighty = 0;
@@ -52,15 +55,25 @@ public class fPanel extends JPanel {
     gbc.gridy = 4;
     leftPanel.add(inputPanel("数量（以下）", fields.suuryo), gbc);
 
+    // right panel
+    gbc.gridy = 5;
+    rightPanel.add(inputPanel("Checkbox 1", fields.checkbox1), gbc);
 
+    gbc.gridy = 6;
+    rightPanel.add(inputPanel("Checkbox 2", fields.checkbox2), gbc);
 
+    gbc.gridy = 7;
+    rightPanel.add(inputPanel("Radio Button", fields.radiobutton), gbc);
+
+    gbc.gridy = 8;
+    rightPanel.add(inputPanel("Select", fields.select), gbc);
 
     // setBackground(Color.RED);
     // setBorder(BorderFactory.createTitledBorder("ターミナル"));
     setBorder(BorderFactory.createLineBorder(this.border));
   }
 
-  private JPanel inputPanel (String label, InnerField field) {
+  private JPanel inputPanel(String label, InnerField field) {
     final JPanel panel = new JPanel(new GridBagLayout());
     final GridBagConstraints gbc = new GridBagConstraints();
     panel.setBackground(new Color(230, 243, 247));
@@ -68,17 +81,22 @@ public class fPanel extends JPanel {
 
     gbc.fill = GridBagConstraints.HORIZONTAL;
     // gbc.ipadx = 6;
-    gbc.gridx = 0; gbc.gridy = 0; gbc.anchor = GridBagConstraints.WEST;
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.anchor = GridBagConstraints.WEST;
     gbc.weightx = 0;
-    gbc.insets = new Insets(4,4,4,4);
+    gbc.insets = new Insets(4, 4, 4, 4);
 
     panel.add(new JLabel(label + ":"), gbc);
 
     // glue spacer
-    gbc.gridx = 1; gbc.weightx = 1;
+    gbc.gridx = 1;
+    gbc.weightx = 1;
     panel.add(javax.swing.Box.createHorizontalGlue(), gbc);
 
-    gbc.gridx = 2; gbc.gridy = 0; gbc.weightx = 0;
+    gbc.gridx = 2;
+    gbc.gridy = 0;
+    gbc.weightx = 0;
     gbc.anchor = GridBagConstraints.EAST;
     field.setParent(panel);
     panel.add(field, gbc);

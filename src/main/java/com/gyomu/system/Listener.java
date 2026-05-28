@@ -40,7 +40,11 @@ public class Listener implements ActionListener {
           fields.shouhin.getText().strip(),
           fields.shinamei.getText().strip(),
           fields.shinaban.getText().strip(),
-          suuryo
+          Integer.parseInt(fields.label_checkbox1.getText().strip()),
+          Integer.parseInt(fields.label_checkbox2.getText().strip()),
+          Integer.parseInt(fields.label_radiobutton.getText().strip()),
+          fields.label_select.getText().strip(),
+          "" + suuryo
         ))
           this.table.insertRows(et);        
         break;
@@ -50,7 +54,11 @@ public class Listener implements ActionListener {
           fields.shouhin.getText().strip(),
           fields.shinamei.getText().strip(),
           fields.shinaban.getText().strip(),
-          suuryo
+          suuryo,
+          Integer.parseInt(fields.label_checkbox1.getText().strip()),
+          Integer.parseInt(fields.label_checkbox2.getText().strip()),
+          fields.label_radiobutton.getText().strip(),
+          fields.label_select.getText().strip()
         );
         if (!ret) {
           // todo
@@ -61,5 +69,4 @@ public class Listener implements ActionListener {
         break;
     }    
   }
-  
 }
