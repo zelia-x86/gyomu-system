@@ -3,6 +3,11 @@ package com.gyomu.system;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 // import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
@@ -10,11 +15,28 @@ public class Table extends AbstractTableModel {
 
   private List<String[]> rows;
 
+  public JScrollPane panel;
+  public JTable table;
+
   private Database db;
 
   public Table (Database db) {
     this.rows = new ArrayList<String[]>();
     this.db = db;
+    table = new JTable(this);
+    panel = new JScrollPane(this.table);
+
+    // selection
+    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    ListSelectionModel selection = table.getSelectionModel();
+    selection.addListSelectionListener(new ListSelectionListener() {
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting()) return;
+
+        System.out.println(table.getSelectedRow());
+      }
+    });
   }
 
   @Override

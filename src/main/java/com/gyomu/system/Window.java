@@ -20,10 +20,9 @@ public class Window extends JFrame {
 
         // buttons
         Terminal terminal = new Terminal(fields, table, db, listener);
-        View view = new View(db, table);
 
 
         add(terminal);
-        add(view);
+        add(table.panel);
     }
 }

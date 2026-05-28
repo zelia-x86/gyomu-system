@@ -18,35 +18,35 @@ public class Database {
   private Connection con = null;
   private PreparedStatement query = null;
   private PreparedStatement insert = null;
-  private String query_sql = "SELECT * FROM \"商品\" WHERE " +
-    "\"製品コード\" LIKE ? AND " +
-    "\"商品コード\" LIKE ? AND " +
-    "\"品番\" LIKE ? AND " +
-    "\"品名\" LIKE ? AND " +
-    "\"数量\" <= ? " +
+  private String query_sql = "SELECT * FROM db WHERE " +
+    "seihin LIKE ? AND " +
+    "shouhin LIKE ? AND " +
+    "shinaban LIKE ? AND " +
+    "hinamei LIKE ? AND " +
+    "amount <= ? " +
     "LIMIT 1000;";
-  private String insert_sql = "INSERT INTO \"商品\" VALUES (?, ?, ?, ?, ?, ?);";
+  private String insert_sql = "INSERT INTO db VALUES (?, ?, ?, ?, ?, ?);";
   private String[] create_sql = {
-    "DROP TABLE IF EXISTS \"商品\";",
-    "CREATE TABLE \"商品\" (" +
-      "	\"uuid\" TEXT NOT NULL UNIQUE," +
-      "\"製品コード\" TEXT NOT NULL," +
-      "\"商品コード\" TEXT NOT NULL," +
-      "\"品番\" TEXT NOT NULL," +
-      "\"品名\" TEXT NOT NULL," +
-      "\"数量\" INTEGER NOT NULL" +
+    "DROP TABLE IF EXISTS db;",
+    "CREATE TABLE db ( " +
+      "uuid TEXT NOT NULL UNIQUE," +
+      "seihin TEXT NOT NULL," +
+      "shouhin TEXT NOT NULL," +
+      "shinaban TEXT NOT NULL," +
+      "hinamei TEXT NOT NULL," +
+      "amount INTEGER NOT NULL" +
       ");",
 
-      "INSERT INTO \"商品\" VALUES ('A100','A100','A100','A100','高品質USB-Cケーブル 1m',30);",
-      "INSERT INTO \"商品\" VALUES ('B120','B120','B120','B120','ワイヤレスマウス 静音タイプ',20);",
-      "INSERT INTO \"商品\" VALUES ('C200','C200','C200','C200','Bluetoothスピーカー 防水仕様',25);",
-      "INSERT INTO \"商品\" VALUES ('D300','D300','D300','D300','27インチ4Kモニター',35);",
-      "INSERT INTO \"商品\" VALUES ('E400','E400','E400','E400','ノートパソコンスタンド アルミ製',40);",
-      "INSERT INTO \"商品\" VALUES ('F500','F500','F500','F500','ゲーミングキーボード RGBライト',45);",
-      "INSERT INTO \"商品\" VALUES ('G600','G600','G600','G600','500GB ポータブルSSD',50);",
-      "INSERT INTO \"商品\" VALUES ('H700','H700','H700','H700','スマートウォッチ 心拍数計測',28);",
-      "INSERT INTO \"商品\" VALUES ('I800','I800','I800','I800','ノイズキャンセリングヘッドホン',32);",
-      "INSERT INTO \"商品\" VALUES ('J900','J900','J900','J900','モバイルバッテリー 20000mAh',60);",
+      "INSERT INTO db VALUES ('A100','A100','A100','A100','高品質USB-Cケーブル 1m',30);",
+      "INSERT INTO db VALUES ('B120','B120','B120','B120','ワイヤレスマウス 静音タイプ',20);",
+      "INSERT INTO db VALUES ('C200','C200','C200','C200','Bluetoothスピーカー 防水仕様',25);",
+      "INSERT INTO db VALUES ('D300','D300','D300','D300','27インチ4Kモニター',35);",
+      "INSERT INTO db VALUES ('E400','E400','E400','E400','ノートパソコンスタンド アルミ製',40);",
+      "INSERT INTO db VALUES ('F500','F500','F500','F500','ゲーミングキーボード RGBライト',45);",
+      "INSERT INTO db VALUES ('G600','G600','G600','G600','500GB ポータブルSSD',50);",
+      "INSERT INTO db VALUES ('H700','H700','H700','H700','スマートウォッチ 心拍数計測',28);",
+      "INSERT INTO db VALUES ('I800','I800','I800','I800','ノイズキャンセリングヘッドホン',32);",
+      "INSERT INTO db VALUES ('J900','J900','J900','J900','モバイルバッテリー 20000mAh',60);",
   };
 
   public Database () {
