@@ -47,6 +47,11 @@ public class Table extends AbstractTableModel {
     this.fireTableDataChanged();
   }
 
+  public void update(List<String[]> newRows) {
+    this.rows = newRows;
+    this.fireTableDataChanged();
+  }
+
   public void clearRows() {
     // no update
     this.rows.clear();

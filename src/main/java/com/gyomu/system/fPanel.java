@@ -1,99 +1,98 @@
 package com.gyomu.system;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.awt.*;
+import javax.swing.*;
 
 public class fPanel extends JPanel {
 
-  private Color border = new Color(74, 181, 223);
+    private final Color border = new Color(74, 181, 223);
 
-  public fPanel (Fields fields) {
-    setLayout(new GridBagLayout());
-    final GridBagConstraints gbc = new GridBagConstraints();
+    public fPanel(Fields fields) {
 
-    final JPanel leftPanel = new JPanel(new GridBagLayout());
-    final JPanel rightPanel = new JPanel(new GridBagLayout());
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
 
-    // leftPanel.setBackground(Color.PINK);
-   // rightPanel.setBackground(Color.GRAY);
+        JPanel leftPanel = new JPanel(new GridBagLayout());
+        JPanel rightPanel = new JPanel(new GridBagLayout());
 
-    gbc.fill = GridBagConstraints.BOTH;
-    gbc.weightx = 1;
-    gbc.weighty = 1;
-    gbc.gridx = 0;
-    gbc.gridy = 0;
-    gbc.insets = new Insets(5,5,5,5);
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1;
+        gbc.insets = new Insets(5, 5, 5, 5);
 
-    add(leftPanel, gbc);
+        gbc.gridx = 0;
+        add(leftPanel, gbc);
 
-    gbc.gridx = 1;
-    add (rightPanel, gbc);
+        gbc.gridx = 1;
+        add(rightPanel, gbc);
 
+        // LEFT PANEL
+        GridBagConstraints l = new GridBagConstraints();
+        l.fill = GridBagConstraints.HORIZONTAL;
+        l.insets = new Insets(5, 5, 5, 5);
+        l.weightx = 1;
 
-    // left panel
-    gbc.weighty = 0;
-    gbc.gridx = 0;
-    gbc.gridy = 0;
-    gbc.ipady = 3;
-    // gbc.fill = GridBagConstraints.HORIZONTAL;
-    leftPanel.add(inputPanel("製品コード", fields.seihin), gbc);
-    gbc.gridy = 1;
-    leftPanel.add(inputPanel("商品コード", fields.shouhin), gbc);
-    gbc.gridy = 2;
-    leftPanel.add(inputPanel("品番", fields.shinaban), gbc);
-    gbc.gridy = 3;
-    leftPanel.add(inputPanel("品名", fields.shinamei), gbc);
-    gbc.gridy = 4;
-    leftPanel.add(inputPanel("数量（以下）", fields.suuryo), gbc);
+        l.gridx = 0; l.gridy = 0;
+        leftPanel.add(inputPanel("製品コード", fields.seihin), l);
 
-    // right panel
-    gbc.gridy = 0;  
-    rightPanel.add(inputPanel("製品グループ", fields.seihingroup), gbc);
-    gbc.gridy = 1;
-    rightPanel.add(inputPanel("保管場所", fields.houkanbasho), gbc);
-    gbc.gridy = 2;
-    rightPanel.add(inputPanel("得意先", fields.tokuisaki), gbc);
-    gbc.gridy = 3;
-    rightPanel.add(inputPanel("仕入先", fields.shiiresaki), gbc);
-    
+        l.gridy++;
+        leftPanel.add(inputPanel("商品コード", fields.shouhin), l);
 
+        l.gridy++;
+        leftPanel.add(inputPanel("品番", fields.shinaban), l);
 
-    // setBackground(Color.RED);
-    // setBorder(BorderFactory.createTitledBorder("ターミナル"));
-    setBorder(BorderFactory.createLineBorder(this.border));
-  }
+        l.gridy++;
+        leftPanel.add(inputPanel("品名", fields.shinamei), l);
 
-  private JPanel inputPanel (String label, JTextField field) {
-    final JPanel panel = new JPanel(new GridBagLayout());
-    final GridBagConstraints gbc = new GridBagConstraints();
-    panel.setBackground(new Color(230, 243, 247));
-    panel.setBorder(BorderFactory.createLineBorder(this.border));
-    // panel.
-    // field.setMaximumSize(new Dimension(Integer.MAX_VALUE, field.getPreferredSize().height));
-    // field.setSize(20, 20);
+        l.gridy++;
+        leftPanel.add(inputPanel("数量（以下）", fields.suuryo), l);
 
-    gbc.fill = GridBagConstraints.HORIZONTAL;
-    // gbc.ipadx = 6;
-    gbc.gridx = 0; gbc.gridy = 0; gbc.anchor = GridBagConstraints.WEST; gbc.weightx = 1;
-    gbc.insets = new Insets(4,4,4,4);
+        // RIGHT PANEL
+        GridBagConstraints r = new GridBagConstraints();
+        // NEW UI
+        r.gridy++;
+        rightPanel.add(checkPanel(fields.chk1), r);
 
-    JLabel l = new JLabel();
-    l.setSize(10, 10);
+        r.gridy++;
+        rightPanel.add(checkPanel(fields.chk2), r);
 
-    panel.add(new JLabel(label + ":"), gbc);
-    // panel.add(javax.swing.Box.createRigidArea(new Dimension(6,0)), gbc);
-    gbc.gridx = 1; gbc.gridy = 0; gbc.anchor = GridBagConstraints.EAST;
-    gbc.weightx = 10;
-    panel.add(field, gbc);
+        r.gridy++;
+        rightPanel.add(checkPanel(fields.radio), r);
 
-    return panel;
-  }
+        r.gridy++;
+        rightPanel.add(selectPanel("セレクト", fields.select), r);
+
+        setBorder(BorderFactory.createLineBorder(border));
+    }
+
+    private JPanel inputPanel(String label, JTextField field) {
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(new Color(230, 243, 247));
+        panel.setBorder(BorderFactory.createLineBorder(border));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(4, 4, 4, 4);
+
+        gbc.gridx = 0;
+        panel.add(new JLabel(label + ":"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        panel.add(field, gbc);
+
+        return panel;
+    }
+
+    private JPanel checkPanel(JComponent comp) {
+        JPanel p = new JPanel();
+        p.add(comp);
+        return p;
+    }
+
+    private JPanel selectPanel(String label, JComboBox<String> box) {
+        JPanel p = new JPanel();
+        p.add(new JLabel(label + ": "));
+        p.add(box);
+        return p;
+    }
 }
