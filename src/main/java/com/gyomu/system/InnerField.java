@@ -53,6 +53,14 @@ class InnerField extends JTextField {
     String ret = super.getText();
     if (ret.equals(this.defaultText))
       ret = "";
+    return ret.strip();
+  }
+
+  public int getInt () {
+    int ret = 0;
+    try {
+      ret = Integer.parseInt(this.getText());
+    } catch (NumberFormatException e) {}
     return ret;
   }
 

@@ -73,4 +73,10 @@ public class Table extends AbstractTableModel {
     // no update
     this.rows.clear();
   }
+
+  public String getUUID () {
+    int row = table.getSelectedRow();
+    if (row < 0) return null;
+    return this.rows.get(row)[0];
+  }
 }

@@ -110,34 +110,59 @@ public class Database {
     return ret;
   }
 
-  public boolean entry (String seihin, String shouhin,
+  public boolean entry(String seihin, String shouhin,
     String shinaban, String shinamei, int suuryo)
-    {
-      if (
-        suuryo < 1
-        || seihin.isBlank()
-        || shouhin.isBlank()
-        || shinaban.isBlank()
-        || shinamei.isBlank()
-      )
-        return false;
-      this.create_cursor(this.con);
-      String uuid = UUID.randomUUID().toString()
-        .replace("-", "").substring(0, 8).toUpperCase();
-      try {
-        this.insert.clearParameters();
-        this.insert.setString(1, uuid);
-        this.insert.setString(2, seihin);
-        this.insert.setString(3, shouhin);
-        this.insert.setString(4, shinaban);
-        this.insert.setString(5, shinamei);
-        this.insert.setInt(6, suuryo);
-        this.insert.executeUpdate();
-      } catch (SQLException e) {
-        return false;
-      }
-      return true;
+  {
+    if (
+      suuryo < 1
+      || seihin.isBlank()
+      || shouhin.isBlank()
+      || shinaban.isBlank()
+      || shinamei.isBlank()
+    )
+      return false;
+    this.create_cursor(this.con);
+    String uuid = UUID.randomUUID().toString()
+      .replace("-", "").substring(0, 8).toUpperCase();
+    try {
+      this.insert.clearParameters();
+      this.insert.setString(1, uuid);
+      this.insert.setString(2, seihin);
+      this.insert.setString(3, shouhin);
+      this.insert.setString(4, shinaban);
+      this.insert.setString(5, shinamei);
+      this.insert.setInt(6, suuryo);
+      this.insert.executeUpdate();
+    } catch (SQLException e) {
+      return false;
     }
+    return true;
+  }
+
+  public boolean edit (
+    String uuid,
+    String seihin, String shouhin,
+    String shinaban, String hinamei,
+    int amount
+  ) {
+    String sql = ";";
+    boolean ret = false;
+    try {
+    } catch (SQLException e) {e.printStackTrace();}
+    return ret;
+  }
+
+  public boolean delete (String uuid) {
+    String sql = "DELETE FROM db WHERE uuid = ?;";
+
+    boolean ret = false;
+    try {
+      PreparedStatement cursor = con.prepareStatement(sql, new String[] {uuid});
+      if (cursor.executeUpdate() == 1)
+        ret = true;
+    } catch (SQLException e) {e.printStackTrace();}
+    return ret;
+  }
   
   public void close () {
     try {

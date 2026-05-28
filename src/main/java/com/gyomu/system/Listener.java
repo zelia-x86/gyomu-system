@@ -22,44 +22,66 @@ public class Listener implements ActionListener {
  
   @Override
   public void actionPerformed(ActionEvent e) {
-    int suuryo =  0;
-    try {
-      suuryo = Integer.parseInt(fields.suuryo.getText().strip());
-    } catch (NumberFormatException ef) {}
-
     // button router
     switch (e.getActionCommand()) {
       case "search":
-        if (suuryo == 0) {
-          suuryo = 100;
-          fields.suuryo.setText("" + suuryo);
-        }
-        this.table.clearRows();
-        for (String[] et : db.searchName(
-          fields.seihin.getText().strip(),
-          fields.shouhin.getText().strip(),
-          fields.shinamei.getText().strip(),
-          fields.shinaban.getText().strip(),
-          suuryo
-        ))
-          this.table.insertRows(et);        
+        search();
         break;
       case "send":
-        boolean ret = this.db.entry(
-          fields.seihin.getText().strip(),
-          fields.shouhin.getText().strip(),
-          fields.shinamei.getText().strip(),
-          fields.shinaban.getText().strip(),
-          suuryo
-        );
-        if (!ret) {
-          // todo
-          JOptionPane.showMessageDialog(parent, "正しく入力してください");
-        }
-        break;    
+        entry();
+        break;
+      case "edit":
+        edit();
+        break;
+      case "delete":
+        delete();
+        break;
       default:
         break;
-    }    
+    }
+  }
+
+  private void search () {
+    if (fields.suuryo.getInt() < 1)
+      fields.suuryo.setText("100");
+
+    this.table.clearRows();
+    for (String[] et : db.searchName (
+      fields.seihin.getText(),
+      fields.shouhin.getText(),
+      fields.shinamei.getText(),
+      fields.shinaban.getText(),
+      fields.suuryo.getInt()
+    ))
+      this.table.insertRows(et);        
+  }
+
+  private void entry () {
+    if (!this.db.entry(
+      fields.seihin.getText(),
+      fields.shouhin.getText(),
+      fields.shinamei.getText(),
+      fields.shinaban.getText(),
+      fields.suuryo.getInt()
+    ))
+      JOptionPane.showMessageDialog(parent, "正しく入力してください");
   }
   
+  private void edit ();
+
+  private void delete () {
+    String uuid = table.getUUID();
+    if (uuid == null) {
+      JOptionPane.showMessageDialog(parent, "アイテムを選択してください");
+      return;
+    }
+    if (db.delete (uuid))
+      search();
+    else
+      error("エラーが発生しました！");
+  }
+
+  private void error(String message) {
+    JOptionPane.showMessageDialog(parent, message);
+  }
 }

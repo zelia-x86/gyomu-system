@@ -6,11 +6,14 @@ import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Terminal extends JPanel {
     private GridBagLayout layout;
     private GridBagConstraints gbc;
+
+    public JLabel UUID;
 
     public Terminal(Fields fields, Table table, Database db, Listener listener) {
         layout = new GridBagLayout();
@@ -18,6 +21,7 @@ public class Terminal extends JPanel {
         setLayout(layout);
 
         // buttons
+        UUID = new JLabel("(UUID)");
         JButton search = new JButton("検索");
         JButton send = new JButton("送信");
 
@@ -36,6 +40,8 @@ public class Terminal extends JPanel {
         gbc.weighty = 1;
         gbc.fill = GridBagConstraints.NONE;
         add(bPanel, gbc);
+
+        bPanel.add(UUID);
         bPanel.add(send);
         bPanel.add(search);
 
