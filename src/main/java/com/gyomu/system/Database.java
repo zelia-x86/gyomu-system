@@ -145,9 +145,11 @@ public class Database {
     String shinaban, String hinamei,
     int amount
   ) {
-    String sql = ";";
+    String sql = "UPDATE db SET ;" +
+      "seihin = ?,"
     boolean ret = false;
     try {
+      PreparedStatement cursor = this.con.prepareStatement(sql);
     } catch (SQLException e) {e.printStackTrace();}
     return ret;
   }
