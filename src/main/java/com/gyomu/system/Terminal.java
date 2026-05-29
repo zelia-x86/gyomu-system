@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,18 +14,20 @@ public class Terminal extends JPanel {
 
     public JLabel UUID;
 
-    public Terminal(Fields fields, Table table, Database db, Listener listener) {
+    public Terminal(Fields fields, Table table, Database db, Listener listener, JLabel uuid) {
         layout = new GridBagLayout();
         gbc = new GridBagConstraints();
         setLayout(layout);
 
         // buttons
-        UUID = new JLabel("(UUID)");
+        this.UUID = uuid;
         JButton search = new JButton("検索");
         JButton send = new JButton("送信");
+        JButton edit = new JButton("編集");
+        JButton delete = new JButton("削除");
 
-        JPanel bPanel = new JPanel();
-        bPanel.setBackground(Color.BLUE);
+        JPanel bPanel = new JPanel(new GridBagLayout());
+        // bPanel.setBackground(Color.BLUE);
 
         // constraints
         gbc.gridx = 0;
@@ -38,19 +39,30 @@ public class Terminal extends JPanel {
 
         gbc.gridy = 1;
         gbc.weighty = 1;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         add(bPanel, gbc);
 
-        bPanel.add(UUID);
-        bPanel.add(send);
-        bPanel.add(search);
+        gbc = new GridBagConstraints();
+        gbc.weightx = 1;
+
+
+
+        bPanel.add(UUID, gbc);
+        bPanel.add(send, gbc);
+        bPanel.add(search, gbc);
+        // bPanel.add(edit, gbc);
+        bPanel.add(delete, gbc);
 
 
         // actions
         search.setActionCommand("search")   ;
-        search.addActionListener(listener);
         send.setActionCommand("send");
+        edit.setActionCommand("edit");
+        delete.setActionCommand("delete");
+        search.addActionListener(listener);
         send.addActionListener(listener);
+        edit.addActionListener(listener);
+        delete.addActionListener(listener);
             
 
         // constraints.gridheight = 3;

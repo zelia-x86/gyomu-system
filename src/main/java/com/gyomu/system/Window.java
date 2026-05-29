@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Window extends JFrame {
     public Window(Database db) {
@@ -14,12 +15,13 @@ public class Window extends JFrame {
         setLocationRelativeTo(null);
         setBackground(Color.PINK);
 
-        Table table = new Table(db);
+        JLabel uuid = new JLabel("(UUID)");
         Fields fields = new Fields();
-        Listener listener = new Listener(db, table, fields, this);
+        Table table = new Table(db, uuid, fields);
+        Listener listener = new Listener(db, table, fields, this, uuid);
 
         // buttons
-        Terminal terminal = new Terminal(fields, table, db, listener);
+        Terminal terminal = new Terminal(fields, table, db, listener, uuid);
 
 
         add(terminal);

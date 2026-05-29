@@ -145,11 +145,20 @@ public class Database {
     String shinaban, String hinamei,
     int amount
   ) {
-    String sql = "UPDATE db SET ;" +
-      "seihin = ?,"
+    String sql = "UPDATE db SET " +
+      "seihin = ?, shouhin = ?, shinaban = ?, hinamei = ?, amount = ? " +
+      "WHERE uuid = ?;";
     boolean ret = false;
     try {
       PreparedStatement cursor = this.con.prepareStatement(sql);
+      cursor.setString(1, seihin);
+      cursor.setString(2, shouhin);
+      cursor.setString(3, shinaban);
+      cursor.setString(4, hinamei);
+      cursor.setInt(5, amount);
+      cursor.setString(6, uuid);
+      if (cursor.executeUpdate() == 1)
+        ret = true;
     } catch (SQLException e) {e.printStackTrace();}
     return ret;
   }
@@ -159,7 +168,8 @@ public class Database {
 
     boolean ret = false;
     try {
-      PreparedStatement cursor = con.prepareStatement(sql, new String[] {uuid});
+      PreparedStatement cursor = con.prepareStatement(sql);
+      cursor.setString(1, uuid);
       if (cursor.executeUpdate() == 1)
         ret = true;
     } catch (SQLException e) {e.printStackTrace();}

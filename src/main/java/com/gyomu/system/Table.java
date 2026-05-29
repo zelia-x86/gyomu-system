@@ -3,6 +3,7 @@ package com.gyomu.system;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -14,15 +15,21 @@ import javax.swing.table.AbstractTableModel;
 public class Table extends AbstractTableModel {
 
   private List<String[]> rows;
+  private Database db;
+  private JLabel uuid;
+  private Fields fields;
+  private boolean rowSelected;
 
   public JScrollPane panel;
   public JTable table;
 
-  private Database db;
 
-  public Table (Database db) {
+  public Table (Database db, JLabel uuid, Fields fields) {
     this.rows = new ArrayList<String[]>();
     this.db = db;
+    this.uuid = uuid;
+    this.fields = fields;
+    this.rowSelected = false;
     table = new JTable(this);
     panel = new JScrollPane(this.table);
 
@@ -33,8 +40,16 @@ public class Table extends AbstractTableModel {
       @Override
       public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting()) return;
-
-        System.out.println(table.getSelectedRow());
+        int row = table.getSelectedRow();
+        if (row < 0) {
+          rowSelected = false;
+          // fields.seihin.setText(fields.seihin.defaultText);
+          table.clearSelection();
+        } else {
+          rowSelected = true;
+          uuid.setText(getUUID());
+          // fields.seihin.setText(rows.get(row)[1]);
+        }
       }
     });
   }
@@ -56,7 +71,7 @@ public class Table extends AbstractTableModel {
 
   @Override
   public Object getValueAt(int rowIndex, int columnIndex) {
-    return this.rows.get(rowIndex)[columnIndex];
+    return this.rows.get(rowIndex)[columnIndex + 1];
   }
 
   public void  updateCell (String value, int rowIndex, int columnIndex) {
@@ -79,4 +94,13 @@ public class Table extends AbstractTableModel {
     if (row < 0) return null;
     return this.rows.get(row)[0];
   }
+
+  // public boolean updateUUID () {
+  //   boolean ret = false;
+  //   int row = table.getSelectedRow();
+  //   if (row >= 0) {
+  //     uuid.setText(getUUID());
+  //     ret = true;
+  //   return false;
+  // }
 }

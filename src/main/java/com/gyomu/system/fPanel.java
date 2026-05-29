@@ -33,7 +33,7 @@ public class fPanel extends JPanel {
     add(leftPanel, gbc);
 
     gbc.gridx = 1;
-    add (rightPanel, gbc);
+    // add (rightPanel, gbc);
 
 
     // left panel
@@ -50,7 +50,7 @@ public class fPanel extends JPanel {
     gbc.gridy = 3;
     leftPanel.add(inputPanel("品名", fields.shinamei), gbc);
     gbc.gridy = 4;
-    leftPanel.add(inputPanel("数量（以下）", fields.suuryo), gbc);
+    leftPanel.add(inputPanel("数量", fields.suuryo), gbc);
 
 
 

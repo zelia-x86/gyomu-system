@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Listener implements ActionListener {
@@ -12,12 +13,17 @@ public class Listener implements ActionListener {
   private Table table;
   private Fields fields;
   private JFrame parent;
+  private JLabel uuid;
+  private boolean editState;
 
-  public Listener (Database db, Table table, Fields fields, JFrame parent) {
+  public Listener (Database db, Table table, Fields fields, JFrame parent, JLabel uuid) {
     this.fields = fields;
     this.db = db;
     this.table = table;
     this.parent = parent;
+    this.uuid = uuid;
+    this.editState = false;
+    
   }
  
   @Override
@@ -67,18 +73,35 @@ public class Listener implements ActionListener {
       JOptionPane.showMessageDialog(parent, "正しく入力してください");
   }
   
-  private void edit ();
+  private void edit () {
+
+    int row = table.table.getSelectedRow();
+
+    if (row < 0) {
+      error("エントリーを選択してください。");
+      return;
+    }
+
+    
+
+
+    if (!this.db.edit (
+      this.uuid.getText(),
+      fields.seihin.getText(),
+      fields.shouhin.getText(),
+      fields.shinamei.getText(),
+      fields.shinaban.getText(),
+      fields.suuryo.getInt()
+    ))
+      JOptionPane.showMessageDialog(parent, "正しく入力してください");
+  }
 
   private void delete () {
     String uuid = table.getUUID();
-    if (uuid == null) {
-      JOptionPane.showMessageDialog(parent, "アイテムを選択してください");
-      return;
-    }
     if (db.delete (uuid))
       search();
     else
-      error("エラーが発生しました！");
+      error("アイテムを選択してください");
   }
 
   private void error(String message) {

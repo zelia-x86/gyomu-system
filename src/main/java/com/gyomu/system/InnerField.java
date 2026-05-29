@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 class InnerField extends JTextField {
   private JPanel parent;
-  private String defaultText;
+  public String defaultText;
   private boolean blocked;
 
   public InnerField (String defaultText) {
